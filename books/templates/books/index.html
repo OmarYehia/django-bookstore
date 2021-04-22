@@ -1,0 +1,18 @@
+{% extends 'layout/main.html' %}
+
+{% block body %}
+    <h1>Book List</h1>
+    <a href={% url 'create_isbn'%}>Create an ISBN</a>
+    <a href={% url 'create'%}>Create a Book</a>
+    {% for book in books %}
+        <h2>{{ book.isbn.title }}</h2>
+        <h4>Written by: {{ book.isbn.author }}</h4>
+        <h4>ISBN: {{ book.isbn.isbn_number }}</h4>
+        <p>{{ book.description }}</p>
+        <a href={% url 'show' book.id %}>show</a>
+        <a href={% url 'edit' book.id %}>edit</a>
+        <a href={% url 'delete' book.id %}>delete</a>
+        <hr>
+    {% endfor %}
+
+{% endblock body %}

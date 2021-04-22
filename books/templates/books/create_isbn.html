@@ -1,0 +1,11 @@
+{% extends 'layout/main.html' %} 
+
+{% block title %}Create ISBN{% endblock title %} 
+
+{% block body %}
+<form action="" method="POST">
+  {% csrf_token %} 
+  {{ isbn_form.as_p }}
+  <button type="submit">Create ISBN</button>
+</form>
+{% endblock body %}
