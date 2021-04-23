@@ -20,16 +20,18 @@ class ISBN(models.Model):
     isbn_number = models.UUIDField(default=uuid.uuid4, editable=False)
 
     def __str__(self):
-        return f"Title: {self.title} | ISBN: {self.isbn_number} | Author: {self.author}"
+        return str(self.isbn_number)
 
 
 class Book(models.Model):
     description = models.TextField(null=False, blank=False)
+    title = models.CharField(max_length=150, null=False, blank=False)
+    author = models.CharField(max_length=100, null=False, blank=False)
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='books', null=True, blank=True)
     categories = models.ManyToManyField(Category)
     isbn = models.OneToOneField(
         ISBN, on_delete=models.CASCADE, null=True, blank=True, related_name='isbn')
 
-    # def __str__(self):
-    #     return self.isbn.author
+    def __str__(self):
+        return self.title

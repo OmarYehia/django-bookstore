@@ -17,7 +17,7 @@ class ISBNAdmin(admin.ModelAdmin):
 
 class BookAdmin(admin.ModelAdmin):
     form = BookForm
-    list_display = ('isbn', 'description',)
+    list_display = ('title', 'author', 'description',)
     list_filter = ('categories',)
     search_fields = ('isbn.title', )
 

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import BookForm, ISBNForm
 from .models import Book, ISBN
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 def index(request):
@@ -8,6 +9,7 @@ def index(request):
     return render(request, "books/index.html", {"books": books})
 
 
+@login_required(login_url='/login')
 def create(request):
     if request.method == 'POST':
         return save_post_and_redirect_to_index(request)
@@ -15,6 +17,7 @@ def create(request):
     return show_create_book_form(request)
 
 
+@permission_required(["books.view_ispn"], raise_exception=True)
 def create_isbn(request):
     if request.method == 'POST':
         return save_isbn_and_redirect_to_index(request)
